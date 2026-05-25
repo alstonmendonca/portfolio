@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="py-10 px-6 border-t border-foreground/[0.08]">
+    <footer className="py-10 px-4 sm:px-6 border-t border-foreground/[0.08]">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted font-sans">
           &copy; {new Date().getFullYear()} Alston Daniel Mendonca

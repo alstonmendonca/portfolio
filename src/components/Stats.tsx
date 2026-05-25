@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const stats = [
-  { value: 15, suffix: "+", label: "Repositories", decimals: 0 },
-  { value: 5, suffix: "+", label: "Production Projects", decimals: 0 },
+  { value: 50, suffix: "+", label: "Cafes Using ViperCore", decimals: 0 },
+  { value: 1.5, suffix: "+", label: "Years of Experience", decimals: 1 },
   { value: 9.58, suffix: "", label: "CGPA / 10", decimals: 2 },
-  { value: 4, suffix: "", label: "Continents Reached", decimals: 0 },
+  { value: 7, suffix: "+", label: "Projects Shipped", decimals: 0 },
 ];
 
 function Counter({
@@ -92,7 +92,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-10 sm:py-16 px-6">
+    <section ref={sectionRef} className="relative py-10 sm:py-16 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {stats.map((s) => (

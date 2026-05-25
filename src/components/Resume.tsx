@@ -35,7 +35,7 @@ export default function Resume() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="resume" className="relative py-16 sm:py-28 px-6">
+    <section ref={sectionRef} id="resume" className="relative py-16 sm:py-28 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <div className="resume-header mb-8 sm:mb-14">
           <span className="block text-sm font-heading font-semibold tracking-widest uppercase text-muted mb-4">
@@ -47,7 +47,7 @@ export default function Resume() {
         </div>
 
         <div className="resume-card rounded-2xl bg-card border border-foreground/[0.08] overflow-hidden">
-          <div className="flex items-center justify-end px-7 py-5 border-b border-foreground/[0.08]">
+          <div className="flex items-center justify-end px-4 sm:px-7 py-4 sm:py-5 border-b border-foreground/[0.08]">
             <a
               href="/Alston_Mendonca_Resume.pdf"
               download

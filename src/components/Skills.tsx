@@ -12,12 +12,12 @@ interface SkillCategory {
 }
 
 const skillCategories: SkillCategory[] = [
-  { category: "Languages", icon: Code2, skills: ["Python", "JavaScript", "TypeScript", "SQL", "C", "C#", "Java"] },
+  { category: "Languages", icon: Code2, skills: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "C/C++", "R"] },
   { category: "Frontend", icon: Layout, skills: ["React.js", "Next.js", "React Native", "HTML/CSS", "Tailwind CSS"] },
   { category: "Backend", icon: Server, skills: ["Node.js", "Express.js", "FastAPI", "Electron.js"] },
   { category: "Databases", icon: Database, skills: ["PostgreSQL", "MySQL", "SQLite", "Supabase", "Redis"] },
-  { category: "AI / ML", icon: Brain, skills: ["YOLOv8", "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "Pandas", "Keras"] },
-  { category: "DevOps & Tools", icon: Container, skills: ["Docker", "Git", "Expo", "CUDA", "Linux"] },
+  { category: "AI / ML", icon: Brain, skills: ["PyTorch", "TensorFlow", "Scikit-learn", "YOLOv8", "Hugging Face", "OpenCV", "Pandas"] },
+  { category: "Cloud & DevOps", icon: Container, skills: ["AWS", "Docker", "Git", "Expo", "CUDA", "Linux"] },
 ];
 
 export default function Skills() {
@@ -43,7 +43,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="relative py-16 sm:py-28 px-6">
+    <section ref={sectionRef} id="skills" className="relative py-16 sm:py-28 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <div className="skills-header mb-8 sm:mb-14">
           <span className="block text-sm font-heading font-semibold tracking-widest uppercase text-muted mb-4">
@@ -61,7 +61,7 @@ export default function Skills() {
               className="skill-group p-6 rounded-2xl bg-card border border-foreground/[0.08] hover:border-foreground/15 card-hover"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-9 h-9 rounded-lg bg-foreground/10 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-foreground/10 flex items-center justify-center shrink-0">
                   <group.icon size={17} className="text-foreground/70" />
                 </div>
                 <h3 className="font-heading text-sm font-semibold text-foreground tracking-wide">

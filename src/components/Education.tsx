@@ -11,10 +11,11 @@ const education = [
     grade: "CGPA: 9.58 / 10",
     period: "2022 - 2026",
     location: "Mangaluru, India",
+    coursework: "Deep Learning, Mathematics for ML, Data Structures & Algorithms, DBMS, Computer Vision, Statistics & Probability",
   },
   {
     school: "GEMS Our Own Indian School",
-    degree: "Senior Secondary (Class XII) - CBSE",
+    degree: "Senior Secondary (Class XII) - CBSE Board",
     grade: "Percentage: 94.4%",
     period: "2013 - 2022",
     location: "Dubai, UAE",
@@ -44,7 +45,7 @@ export default function Education() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="education" className="relative py-16 sm:py-28 px-6">
+    <section ref={sectionRef} id="education" className="relative py-16 sm:py-28 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <div className="edu-header mb-8 sm:mb-14">
           <span className="block text-sm font-heading font-semibold tracking-widest uppercase text-muted mb-4">
@@ -68,9 +69,16 @@ export default function Education() {
               <h3 className="font-heading text-xl font-semibold mb-2 text-foreground">
                 {edu.school}
               </h3>
-              <p className="text-muted font-sans mb-5 leading-relaxed text-[15px]">
+              <p className="text-muted font-sans mb-4 leading-relaxed text-[15px]">
                 {edu.degree}
               </p>
+
+              {edu.coursework && (
+                <p className="text-muted/80 font-sans mb-5 text-sm leading-relaxed">
+                  <span className="text-foreground/60 font-medium">Relevant Coursework: </span>
+                  {edu.coursework}
+                </p>
+              )}
 
               <div className="space-y-2 text-sm text-muted">
                 <div className="flex items-center gap-2">

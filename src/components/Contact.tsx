@@ -6,7 +6,7 @@ import { Mail, Github, Linkedin, Phone, ArrowUpRight } from "lucide-react";
 
 const contactLinks = [
   { label: "Email", value: "alstondmendonca@gmail.com", href: "mailto:alstondmendonca@gmail.com", icon: Mail },
-  { label: "Phone", value: "+91 9108816244", href: "tel:+919108816244", icon: Phone },
+  { label: "Phone", value: "+971 56 324 3787", href: "tel:+971563243787", icon: Phone },
   { label: "GitHub", value: "github.com/alstonmendonca", href: "https://github.com/alstonmendonca", icon: Github },
   { label: "LinkedIn", value: "linkedin.com/in/alstonmendonca", href: "https://linkedin.com/in/alstonmendonca", icon: Linkedin },
 ];
@@ -34,8 +34,8 @@ export default function Contact() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className="relative py-16 sm:py-28 px-6 overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-foreground/[0.02] rounded-full blur-[140px] pointer-events-none" />
+    <section ref={sectionRef} id="contact" className="relative py-16 sm:py-28 px-4 sm:px-6 overflow-hidden">
+      <div className="mobile-hide-decor absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-foreground/[0.02] rounded-full blur-[140px] pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto text-center">
         <div className="contact-header mb-8 sm:mb-14">
@@ -46,8 +46,8 @@ export default function Contact() {
             Let&apos;s <span className="gradient-text">connect.</span>
           </h2>
           <p className="text-lg text-muted font-sans max-w-xl mx-auto leading-relaxed">
-            I&apos;m always open to discussing new projects, internship
-            opportunities, or interesting collaborations.
+            I&apos;m always open to discussing new projects, collaborations,
+            or interesting opportunities. Based in Dubai, open to relocation.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function Contact() {
                 </div>
                 <div className="text-left min-w-0">
                   <span className="block text-xs text-muted uppercase tracking-wider">{link.label}</span>
-                  <span className="block text-foreground font-sans text-sm truncate">{link.value}</span>
+                  <span className="block text-foreground font-sans text-sm break-all sm:truncate">{link.value}</span>
                 </div>
               </div>
               <ArrowUpRight

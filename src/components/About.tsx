@@ -9,19 +9,19 @@ const highlights = [
     icon: Code2,
     title: "Full-Stack",
     description:
-      "From React frontends to Node.js backends, I build complete, production-ready applications.",
+      "From React/Next.js frontends to Node.js/FastAPI backends, I build complete production-ready applications — including a POS system serving 50+ cafes.",
   },
   {
     icon: Brain,
     title: "AI & ML",
     description:
-      "Hands-on experience with YOLOv8, PyTorch, TensorFlow, and real-time inference systems.",
+      "Hands-on experience with BERT, YOLOv8, PyTorch, TensorFlow, AWS SageMaker, and LLM integration — deployed models achieving near-99% accuracy.",
   },
   {
     icon: Rocket,
     title: "Ship Fast",
     description:
-      "5 projects running simultaneously, from POS systems in production to research apps.",
+      "From co-founding a POS startup to building AI compliance systems, I turn ideas into production software that real users depend on daily.",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="relative py-16 sm:py-28 px-6">
+    <section ref={sectionRef} id="about" className="relative py-16 sm:py-28 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <div className="about-header mb-12">
           <span className="block text-sm font-heading font-semibold tracking-widest uppercase text-muted mb-4">
@@ -77,12 +77,13 @@ export default function About() {
         </div>
 
         <p className="about-text text-lg sm:text-xl text-muted leading-relaxed font-sans max-w-3xl mb-10 sm:mb-16">
-          I&apos;m a 21-year-old AI &amp; ML engineering student from
-          Mangaluru, India, with roots in Dubai. I thrive at the intersection
-          of full-stack development and machine learning &mdash; turning ideas
-          into shipped products. From a restaurant POS system handling real
-          orders daily to AI-powered compliance detection, I believe the best
-          way to learn is to build and deploy.
+          I&apos;m a Dubai-based AI &amp; ML engineer with over 1.5 years of
+          professional experience building and deploying machine learning systems.
+          I specialize in NLP, Computer Vision, and LLM integration &mdash; with
+          a strong full-stack foundation. I co-founded ViperCore, a POS platform
+          adopted by 50+ cafes, achieved near-99% accuracy with BERT models in
+          production via AWS SageMaker, and love turning complex ideas into shipped
+          products.
         </p>
 
         <div className="about-cards grid grid-cols-1 md:grid-cols-3 gap-5">

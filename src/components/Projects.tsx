@@ -2,14 +2,33 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { Github, Folder } from "lucide-react";
+import { Github, Folder, ExternalLink } from "lucide-react";
 
 const projects = [
+  {
+    title: "ViperCore",
+    subtitle: "Offline-First POS Platform — 50+ Cafes in Production",
+    description:
+      "Co-founded and built a fully-fledged offline-first Point-of-Sale platform adopted by 50+ cafes across Karnataka, India. Architected the desktop application with Next.js and Electron.js, featuring AES-256 encrypted local SQLite storage, 9 production modules (billing, KOT printing, inventory, tax reporting, employee analytics), and GST-compliant invoicing.",
+    tags: ["Next.js", "Electron.js", "SQLite", "AES-256", "React", "Node.js"],
+    github: "https://github.com/alstonmendonca",
+    link: "https://www.vipercore.in",
+    featured: true,
+  },
+  {
+    title: "DueLLM",
+    subtitle: "Self-Refining LLM Orchestration System",
+    description:
+      "Designed and developed a self-refining generative AI system where two LLMs iteratively critique and improve each other's outputs, implementing multi-model orchestration via Amazon Bedrock. Built a full-stack application using Next.js and FastAPI with real-time streaming, achieving automated quality improvement across reasoning, code generation, and creative writing tasks.",
+    tags: ["Next.js", "AWS Bedrock", "Boto3", "FastAPI", "Node.js"],
+    github: "https://github.com/alstonmendonca",
+    featured: true,
+  },
   {
     title: "DressGuard AI",
     subtitle: "AI-Powered Clothing Compliance System",
     description:
-      "Built a real-time clothing compliance detection system supporting webcam, video file, image upload, and IP camera inputs. Engineered a dual-mode webcam pipeline with lightweight positioning guidance followed by frame-skipped YOLOv8 inference, reducing idle GPU usage.",
+      "Led a team of 4 to build a real-time AI-powered clothing detection and compliance system supporting webcam, video files, image uploads, and IP camera inputs. Fine-tuned YOLOv8 models on custom datasets, developed a configurable rule engine with automatic model discovery and bounding box visualization, and implemented real-time facial detection and recognition via FaceNET and Redis.",
     tags: ["Python", "FastAPI", "YOLOv8", "React", "Vite", "CUDA", "Redis"],
     github: "https://github.com/alstonmendonca/DressGuardAI",
     featured: true,
@@ -18,8 +37,8 @@ const projects = [
     title: "ProperLCP",
     subtitle: "Restaurant POS System — In Production",
     description:
-      "Led a 2-person team to design, develop, and deploy a full-featured Point-of-Sale system from scratch. Currently in production use at Lassi Corner, SJEC, Mangalore — handling daily order management, billing, and inventory tracking.",
-    tags: ["Electron.js", "React", "Node.js", "SQLite"],
+      "Led a team of 2 to design, develop, and deploy a fully-fledged restaurant Point-of-Sale system from scratch. Delivered 75+ core POS features including real-time billing, inventory tracking, and reporting dashboards comparable to industry platforms like PetPooja and Dineout. Currently in production use at The Lassi Corner, SJEC, Mangaluru.",
+    tags: ["Electron.js", "React", "Node.js", "SQLite", "Git"],
     github: "https://github.com/alstonmendonca/ProperLCP",
     featured: true,
   },
@@ -27,10 +46,10 @@ const projects = [
     title: "SHANTHI",
     subtitle: "Nurse Mindfulness Study App",
     description:
-      "Developed a cross-platform mobile application for PhD research on nurse mental wellness, enabling survey questionnaires, emotional check-ins, and journaling. Integrated Supabase for authentication and real-time data sync.",
+      "Developed a cross-platform mobile application supporting a year-long PhD research study on mental wellness among nurses and healthcare professionals. Implemented structured surveys, emotional check-ins, journaling, and guided mindfulness audio sessions with a scalable Supabase backend.",
     tags: ["React Native", "TypeScript", "Expo", "Supabase"],
     github: "https://github.com/alstonmendonca/NurseMindfulnessStudyApp",
-    featured: true,
+    featured: false,
   },
   {
     title: "RazorX",
@@ -94,8 +113,8 @@ export default function Projects() {
   const others = projects.filter((p) => !p.featured);
 
   return (
-    <section ref={sectionRef} id="projects" className="relative py-16 sm:py-28 px-6 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-foreground/[0.02] rounded-full blur-[180px] pointer-events-none" />
+    <section ref={sectionRef} id="projects" className="relative py-16 sm:py-28 px-4 sm:px-6 overflow-hidden">
+      <div className="mobile-hide-decor absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-foreground/[0.02] rounded-full blur-[180px] pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">
         <div className="proj-header mb-8 sm:mb-14">
@@ -110,29 +129,44 @@ export default function Projects() {
         {/* Featured */}
         <div className="proj-grid space-y-6 mb-8 sm:mb-14">
           {featured.map((project) => (
-            <a
+            <div
               key={project.title}
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="proj-featured group block p-5 sm:p-7 md:p-9 rounded-2xl bg-card border border-foreground/[0.08] hover:border-foreground/20 card-hover cursor-pointer"
+              className="proj-featured group p-5 sm:p-7 md:p-9 rounded-2xl bg-card border border-foreground/[0.08] hover:border-foreground/20 card-hover"
             >
-              <div className="flex items-start justify-between mb-3">
-                <div>
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="min-w-0">
                   <span className="text-xs font-heading font-semibold tracking-widest uppercase text-muted">
                     Featured Project
                   </span>
-                  <h3 className="font-heading text-2xl sm:text-3xl font-bold mt-1 text-foreground">
+                  <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold mt-1 text-foreground">
                     {project.title}
                   </h3>
                   <p className="text-muted text-sm mt-1 font-sans">
                     {project.subtitle}
                   </p>
                 </div>
-                <Github
-                  size={20}
-                  className="text-muted group-hover:text-foreground transition-colors duration-300 shrink-0 mt-2"
-                />
+                <div className="flex items-center gap-2 mt-2 shrink-0">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted hover:text-foreground transition-colors duration-300"
+                      aria-label="Live site"
+                    >
+                      <ExternalLink size={18} />
+                    </a>
+                  )}
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted hover:text-foreground transition-colors duration-300"
+                    aria-label="GitHub"
+                  >
+                    <Github size={20} />
+                  </a>
+                </div>
               </div>
 
               <p className="text-muted font-sans leading-relaxed mb-5 max-w-3xl text-[15px]">
@@ -149,7 +183,7 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
@@ -164,7 +198,7 @@ export default function Projects() {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="proj-other group block p-6 rounded-2xl bg-card border border-foreground/[0.08] hover:border-foreground/20 card-hover cursor-pointer"
+              className="proj-other group block p-5 sm:p-6 rounded-2xl bg-card border border-foreground/[0.08] hover:border-foreground/20 card-hover cursor-pointer"
             >
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2.5">

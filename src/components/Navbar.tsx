@@ -75,9 +75,9 @@ export default function Navbar() {
           : scrolled
             ? "bg-card/90 backdrop-blur-xl border border-foreground/[0.08] shadow-lg shadow-black/30"
             : "bg-transparent"
-      }`}
+      } left-3 right-3 sm:left-4 sm:right-4`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <a
           href="#hero"
           onClick={(e) => {

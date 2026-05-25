@@ -23,7 +23,6 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.4 });
 
-      // Badge
       tl.from(badgeRef.current, {
         opacity: 0,
         y: 20,
@@ -31,7 +30,6 @@ export default function Hero() {
         ease: "power3.out",
       });
 
-      // Char-split the name
       if (nameRef.current) {
         const text = nameRef.current.textContent || "";
         nameRef.current.innerHTML = text
@@ -54,10 +52,8 @@ export default function Hero() {
       tl.from(socialsRef.current, { opacity: 0, y: 16, duration: 0.4, ease: "power3.out" }, "-=0.15");
       tl.from(scrollRef.current, { opacity: 0, duration: 0.4, ease: "power3.out" }, "-=0.1");
 
-      // Floating arrow
       gsap.to(scrollRef.current, { y: 8, duration: 1.5, repeat: -1, yoyo: true, ease: "power1.inOut" });
 
-      // Parallax fade on scroll
       gsap.to(contentRef.current, {
         y: 80,
         opacity: 0,
@@ -73,16 +69,16 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden"
     >
       <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] bg-foreground/[0.03] rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 -right-40 w-[400px] h-[400px] bg-foreground/[0.02] rounded-full blur-[120px]" />
+      <div className="mobile-hide-decor absolute top-1/4 -left-40 w-[500px] h-[500px] bg-foreground/[0.03] rounded-full blur-[120px]" />
+      <div className="mobile-hide-decor absolute bottom-1/4 -right-40 w-[400px] h-[400px] bg-foreground/[0.02] rounded-full blur-[120px]" />
 
       <div ref={contentRef} className="relative z-10 text-center max-w-5xl mx-auto">
         <div ref={badgeRef} className="mb-4 sm:mb-8">
           <span className="inline-block px-5 py-2.5 rounded-full border border-border text-sm text-muted font-sans tracking-wide">
-            Full-Stack Developer &amp; ML Engineer
+            Full-Stack Developer &amp; ML Engineer — Dubai, UAE
           </span>
         </div>
 
@@ -98,11 +94,10 @@ export default function Hero() {
           ref={taglineRef}
           className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-8 sm:mb-12 font-sans leading-relaxed"
         >
-          Building production-ready applications with AI, full-stack
-          engineering, and a passion for solving real-world problems.
+          AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer Vision, and LLM integration — building production-ready applications that ship.
         </p>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-14">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-14">
           <a
             href="#projects"
             onClick={(e) => {

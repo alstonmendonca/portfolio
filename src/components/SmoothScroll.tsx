@@ -15,10 +15,12 @@ export default function SmoothScroll() {
       const Lenis = (await import("lenis")).default;
       if (cancelled) return;
 
+      const isMobile = window.innerWidth < 640;
+
       const instance = new Lenis({
-        duration: 1.2,
+        duration: isMobile ? 0.8 : 1.2,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        touchMultiplier: 2,
+        touchMultiplier: isMobile ? 1.5 : 2,
       });
 
       lenisRef.current = instance;
