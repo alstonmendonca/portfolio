@@ -1,0 +1,18 @@
+{
+  "pdf": "/Alston_Mendonca_Resume.pdf",
+  "generatedAt": "2026-06-02T05:45:01.197Z",
+  "pages": [
+    {
+      "src": "/resume/page-1.png",
+      "alt": "Alston Mendonca resume page 1",
+      "width": 1224,
+      "height": 1584
+    },
+    {
+      "src": "/resume/page-2.png",
+      "alt": "Alston Mendonca resume page 2",
+      "width": 1224,
+      "height": 1584
+    }
+  ]
+}

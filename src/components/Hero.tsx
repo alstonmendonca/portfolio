@@ -18,7 +18,8 @@ export default function Hero() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReducedMotion) return;
+    const isSmallScreen = window.matchMedia("(max-width: 639px)").matches;
+    if (prefersReducedMotion || isSmallScreen) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.4 });
@@ -69,22 +70,22 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center px-4 sm:px-6 pt-28 pb-20 sm:pt-32 sm:pb-24 overflow-hidden"
     >
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="mobile-hide-decor absolute top-1/4 -left-40 w-[500px] h-[500px] bg-foreground/[0.03] rounded-full blur-[120px]" />
       <div className="mobile-hide-decor absolute bottom-1/4 -right-40 w-[400px] h-[400px] bg-foreground/[0.02] rounded-full blur-[120px]" />
 
-      <div ref={contentRef} className="relative z-10 text-center max-w-5xl mx-auto">
+      <div ref={contentRef} className="relative z-10 text-center max-w-5xl mx-auto w-full">
         <div ref={badgeRef} className="mb-4 sm:mb-8">
-          <span className="inline-block px-5 py-2.5 rounded-full border border-border text-sm text-muted font-sans tracking-wide">
-            Full-Stack Developer &amp; ML Engineer — Dubai, UAE
+          <span className="inline-block max-w-full px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-border text-xs sm:text-sm text-muted font-sans tracking-wide">
+            Full-Stack Developer &amp; ML Engineer &mdash; Dubai, UAE
           </span>
         </div>
 
         <h1
           ref={nameRef}
-          className="font-heading text-[2rem] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7rem] font-bold tracking-tight leading-[1.05] mb-4 sm:mb-8"
+          className="font-heading text-[clamp(2.75rem,12vw,4.5rem)] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7rem] font-bold tracking-tight leading-[1.02] mb-4 sm:mb-8"
           aria-label="Alston Mendonca"
         >
           Alston Mendonca
@@ -92,9 +93,10 @@ export default function Hero() {
 
         <p
           ref={taglineRef}
-          className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-8 sm:mb-12 font-sans leading-relaxed"
+          className="text-base sm:text-xl text-muted max-w-2xl mx-auto mb-8 sm:mb-12 font-sans leading-relaxed"
         >
-          AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer Vision, and LLM integration — building production-ready applications that ship.
+          AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer
+          Vision, and LLM integration &mdash; building production-ready applications that ship.
         </p>
 
         <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-14">
@@ -104,7 +106,7 @@ export default function Hero() {
               e.preventDefault();
               document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="group px-8 py-4 bg-foreground text-background font-heading font-semibold rounded-xl hover:bg-accent-hover transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
+            className="group w-full sm:w-auto px-8 py-4 bg-foreground text-background font-heading font-semibold rounded-xl hover:bg-accent-hover transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
           >
             View My Work
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
@@ -117,13 +119,13 @@ export default function Hero() {
               e.preventDefault();
               document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-8 py-4 border border-border text-foreground font-heading font-semibold rounded-xl hover:border-foreground/50 transition-all duration-300 cursor-pointer text-center"
+            className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-heading font-semibold rounded-xl hover:border-foreground/50 transition-all duration-300 cursor-pointer text-center"
           >
             Get In Touch
           </a>
         </div>
 
-        <div ref={socialsRef} className="flex gap-3 justify-center">
+        <div ref={socialsRef} className="flex gap-2 sm:gap-3 justify-center">
           {[
             { href: "https://github.com/alstonmendonca", label: "GitHub", Icon: Github },
             { href: "https://linkedin.com/in/alstonmendonca", label: "LinkedIn", Icon: Linkedin },
@@ -134,7 +136,7 @@ export default function Hero() {
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
               rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              className="w-11 h-11 flex items-center justify-center rounded-xl text-muted hover:text-foreground hover:bg-foreground/10 transition-all duration-300 cursor-pointer"
+              className="w-12 h-12 flex items-center justify-center rounded-xl text-muted hover:text-foreground hover:bg-foreground/10 transition-all duration-300 cursor-pointer"
               aria-label={label}
             >
               <Icon size={20} />
@@ -145,7 +147,7 @@ export default function Hero() {
 
       <div
         ref={scrollRef}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted/60"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-muted/60"
       >
         <span className="text-xs tracking-widest uppercase">Scroll</span>
         <ArrowDown size={16} />

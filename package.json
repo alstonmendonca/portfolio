@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "resume:images": "node scripts/generate-resume-images.mjs",
+    "predev": "npm run resume:images",
+    "prebuild": "npm run resume:images",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -24,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "pdfjs-dist": "^5.4.394",
     "puppeteer": "^24.37.5",
     "tailwindcss": "^4",
     "typescript": "^5"

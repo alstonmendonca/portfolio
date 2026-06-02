@@ -69,13 +69,13 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-2xl ${
+      className={`fixed top-3 sm:top-4 left-3 right-3 sm:left-4 sm:right-4 z-50 transition-all duration-500 rounded-2xl ${
         mobileOpen
           ? "bg-card border border-foreground/[0.08] shadow-lg shadow-black/30"
           : scrolled
-            ? "bg-card/90 backdrop-blur-xl border border-foreground/[0.08] shadow-lg shadow-black/30"
+            ? "bg-card/90 backdrop-blur-xl mobile-no-blur border border-foreground/[0.08] shadow-lg shadow-black/30"
             : "bg-transparent"
-      } left-3 right-3 sm:left-4 sm:right-4`}
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <a
@@ -131,7 +131,7 @@ export default function Navbar() {
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 pb-6 flex flex-col gap-4">
+        <div className="px-6 pb-6 max-h-[calc(100svh-5rem)] overflow-y-auto flex flex-col gap-2">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -140,7 +140,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNavClick(link.href);
               }}
-              className="text-foreground transition-colors duration-300 cursor-pointer text-lg hover:text-accent-hover py-2"
+              className="text-foreground transition-colors duration-300 cursor-pointer text-lg hover:text-accent-hover py-3"
             >
               {link.label}
             </a>
