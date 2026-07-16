@@ -1,0 +1,69 @@
+/* Hallmark · genre: brutalist · theme: Brutal
+ * Portable design tokens — bone paper, near-black ink, one signal red-orange accent, hard edges.
+ * Warm anchor hue ~60. Source of truth mirrored in src/app/globals.css :root.
+ */
+:root {
+  /* ── Paper / surfaces (light, high contrast) ── */
+  --color-paper:    oklch(95% 0.012 85);
+  --color-paper-2:  oklch(97% 0.010 85);
+  --color-paper-3:  oklch(90% 0.014 82);
+  --color-rule:     oklch(17% 0.020 60);   /* borders are INK */
+  --color-rule-2:   oklch(17% 0.020 60);
+
+  /* ── Ink / text ── */
+  --color-ink:      oklch(17% 0.020 60);
+  --color-muted:    oklch(38% 0.020 60);
+  --color-neutral:  oklch(50% 0.022 62);
+
+  /* ── Accent (single signal red-orange) ── */
+  --color-accent:      oklch(60% 0.230 28);
+  --color-accent-deep: oklch(52% 0.220 28);
+  --color-focus:       oklch(52% 0.220 28);
+  --color-on-accent:   oklch(97% 0.010 85);
+
+  /* ── Fonts (2 + 1) ── */
+  --font-display: var(--font-bricolage), "Arial Black", system-ui, sans-serif;
+  --font-body:    var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-space), ui-monospace, "SFMono-Regular", monospace;
+
+  /* ── Type scale (1.25) ── */
+  --text-xs:   0.75rem;
+  --text-sm:   0.8125rem;
+  --text-base: 1rem;
+  --text-md:   1.25rem;
+  --text-lg:   1.5625rem;
+  --text-xl:   1.9531rem;
+  --text-2xl:  2.4414rem;
+  --text-3xl:  3.0518rem;
+  --text-display:   clamp(3rem, 9vw + 0.5rem, 6.5rem);
+  --text-display-s: clamp(2.25rem, 5vw + 0.5rem, 4rem);
+
+  /* ── Spacing (4pt) ── */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  /* ── Motion (brutalist = fast, no bounce) ── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 90ms;
+  --dur-short: 160ms;
+  --dur-long:  320ms;
+
+  /* ── Rules / edges (no radius) ── */
+  --rule-hair: 2px;
+  --rule-heavy: 3px;
+  --radius: 0;
+  --shadow-hard: 6px 6px 0 var(--color-ink);
+  --shadow-hard-sm: 4px 4px 0 var(--color-ink);
+  --page-gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --measure: 66ch;
+}

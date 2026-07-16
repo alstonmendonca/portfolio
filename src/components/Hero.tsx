@@ -1,157 +1,79 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import Reveal from "./Reveal";
+
+const socials = [
+  { href: "https://github.com/alstonmendonca", label: "GitHub", Icon: Github },
+  { href: "https://linkedin.com/in/alstonmendonca", label: "LinkedIn", Icon: Linkedin },
+  { href: "mailto:alstondmendonca@gmail.com", label: "Email", Icon: Mail },
+];
+
+function jump(href: string) {
+  document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+}
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const socialsRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    const isSmallScreen = window.matchMedia("(max-width: 639px)").matches;
-    if (prefersReducedMotion || isSmallScreen) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.4 });
-
-      tl.from(badgeRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        ease: "power3.out",
-      });
-
-      if (nameRef.current) {
-        const text = nameRef.current.textContent || "";
-        nameRef.current.innerHTML = text
-          .split("")
-          .map(
-            (char) =>
-              `<span style="display:inline-block;opacity:0;transform:translateY(50px)">${char === " " ? "&nbsp;" : char}</span>`
-          )
-          .join("");
-
-        tl.to(
-          nameRef.current.querySelectorAll("span"),
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.02, ease: "power3.out" },
-          "-=0.2"
-        );
-      }
-
-      tl.from(taglineRef.current, { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" }, "-=0.15");
-      tl.from(ctaRef.current, { opacity: 0, y: 16, duration: 0.5, ease: "power3.out" }, "-=0.2");
-      tl.from(socialsRef.current, { opacity: 0, y: 16, duration: 0.4, ease: "power3.out" }, "-=0.15");
-      tl.from(scrollRef.current, { opacity: 0, duration: 0.4, ease: "power3.out" }, "-=0.1");
-
-      gsap.to(scrollRef.current, { y: 8, duration: 1.5, repeat: -1, yoyo: true, ease: "power1.inOut" });
-
-      gsap.to(contentRef.current, {
-        y: 80,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      id="hero"
-      className="relative min-h-[100svh] flex flex-col items-center justify-center px-4 sm:px-6 pt-28 pb-20 sm:pt-32 sm:pb-24 overflow-hidden"
-    >
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="mobile-hide-decor absolute top-1/4 -left-40 w-[500px] h-[500px] bg-foreground/[0.03] rounded-full blur-[120px]" />
-      <div className="mobile-hide-decor absolute bottom-1/4 -right-40 w-[400px] h-[400px] bg-foreground/[0.02] rounded-full blur-[120px]" />
+    <header id="top" className="hero wrap">
+      <Reveal className="hero__kicker" index={0} as="p">
+        <span className="hero__dot" aria-hidden />
+        Software Developer &amp; AI/ML Engineer
+      </Reveal>
 
-      <div ref={contentRef} className="relative z-10 text-center max-w-5xl mx-auto w-full">
-        <div ref={badgeRef} className="mb-4 sm:mb-8">
-          <span className="inline-block max-w-full px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-border text-xs sm:text-sm text-muted font-sans tracking-wide">
-            Full-Stack Developer &amp; ML Engineer &mdash; Dubai, UAE
-          </span>
-        </div>
+      <Reveal as="h1" className="hero__display" index={1}>
+        I build software
+        <br />
+        that <span className="block-accent">ships</span>.
+      </Reveal>
 
-        <h1
-          ref={nameRef}
-          className="font-heading text-[clamp(2.75rem,12vw,4.5rem)] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7rem] font-bold tracking-tight leading-[1.02] mb-4 sm:mb-8"
-          aria-label="Alston Mendonca"
-        >
-          Alston Mendonca
-        </h1>
+      <Reveal as="p" className="hero__lede" index={2}>
+        I&apos;m Alston Mendonca. I turn machine-learning models and full-stack
+        interfaces into production software real users depend on every day.
+      </Reveal>
 
-        <p
-          ref={taglineRef}
-          className="text-base sm:text-xl text-muted max-w-2xl mx-auto mb-8 sm:mb-12 font-sans leading-relaxed"
-        >
-          AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer
-          Vision, and LLM integration &mdash; building production-ready applications that ship.
-        </p>
+      <Reveal as="p" className="hero__meta" index={3}>
+        <span>
+          <b>1.5+</b> yrs shipping
+        </span>
+        <span>
+          BERT <b>~99%</b>
+        </span>
+        <span>
+          <b>48k</b> LOC engine
+        </span>
+        <span>
+          CGPA <b>9.58</b>
+        </span>
+      </Reveal>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-14">
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group w-full sm:w-auto px-8 py-4 bg-foreground text-background font-heading font-semibold rounded-xl hover:bg-accent-hover transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
-          >
-            View My Work
-            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-              &rarr;
-            </span>
-          </a>
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="w-full sm:w-auto px-8 py-4 border border-border text-foreground font-heading font-semibold rounded-xl hover:border-foreground/50 transition-all duration-300 cursor-pointer text-center"
-          >
-            Get In Touch
-          </a>
-        </div>
-
-        <div ref={socialsRef} className="flex gap-2 sm:gap-3 justify-center">
-          {[
-            { href: "https://github.com/alstonmendonca", label: "GitHub", Icon: Github },
-            { href: "https://linkedin.com/in/alstonmendonca", label: "LinkedIn", Icon: Linkedin },
-            { href: "mailto:alstondmendonca@gmail.com", label: "Email", Icon: Mail },
-          ].map(({ href, label, Icon }) => (
+      <Reveal className="hero__actions" index={4}>
+        <button type="button" className="btn btn--primary" onClick={() => jump("#work")}>
+          View selected work
+          <span aria-hidden>→</span>
+        </button>
+        <a className="btn btn--ghost" href="/Alston_Mendonca_Resume.pdf" download>
+          Résumé <span aria-hidden>↓</span>
+        </a>
+        <span className="hero__socials">
+          {socials.map(({ href, label, Icon }) => (
             <a
               key={label}
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
               rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              className="w-12 h-12 flex items-center justify-center rounded-xl text-muted hover:text-foreground hover:bg-foreground/10 transition-all duration-300 cursor-pointer"
+              className="icon-btn"
               aria-label={label}
             >
-              <Icon size={20} />
+              <Icon size={19} />
             </a>
           ))}
-        </div>
-      </div>
+        </span>
+      </Reveal>
 
-      <div
-        ref={scrollRef}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-muted/60"
-      >
-        <span className="text-xs tracking-widest uppercase">Scroll</span>
-        <ArrowDown size={16} />
-      </div>
-    </section>
+      <Reveal className="hero__scroll" index={5}>
+        <ArrowDown size={14} /> Scroll to work
+      </Reveal>
+    </header>
   );
 }

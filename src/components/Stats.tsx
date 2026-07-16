@@ -1,115 +1,78 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const stats = [
-  { value: 50, suffix: "+", label: "Cafes Using ViperCore", decimals: 0 },
-  { value: 1.5, suffix: "+", label: "Years of Experience", decimals: 1 },
+  { value: 196.9, suffix: "M", label: "LSEG quotes analyzed", decimals: 1 },
+  { value: 1.5, suffix: "+", label: "years in production", decimals: 1 },
   { value: 9.58, suffix: "", label: "CGPA / 10", decimals: 2 },
-  { value: 7, suffix: "+", label: "Projects Shipped", decimals: 0 },
+  { value: 7, suffix: "+", label: "projects shipped", decimals: 0 },
 ];
 
 function Counter({
   target,
-  suffix,
   decimals,
   active,
 }: {
   target: number;
-  suffix: string;
   decimals: number;
   active: boolean;
 }) {
-  const [display, setDisplay] = useState(decimals > 0 ? "0.00" : "0");
-  const obj = useRef({ val: 0 });
+  const [display, setDisplay] = useState(target.toFixed(decimals));
+  const raf = useRef(0);
 
   useEffect(() => {
     if (!active) return;
-    obj.current.val = 0;
-    gsap.to(obj.current, {
-      val: target,
-      duration: 2,
-      ease: "power2.out",
-      onUpdate: () => {
-        setDisplay(
-          decimals > 0
-            ? obj.current.val.toFixed(decimals)
-            : String(Math.round(obj.current.val))
-        );
-      },
-    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplay(target.toFixed(decimals));
+      return;
+    }
+    const start = performance.now();
+    const duration = 1400;
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      setDisplay((target * ease(t)).toFixed(decimals));
+      if (t < 1) raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
   }, [active, target, decimals]);
 
-  return (
-    <span>
-      {active ? display : decimals > 0 ? target.toFixed(decimals) : target}
-      {suffix}
-    </span>
-  );
+  return <span>{display}</span>;
 }
 
 export default function Stats() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) {
-      setActive(true);
-      return;
-    }
-
-    const trigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top 80%",
-      once: true,
-      onEnter: () => setActive(true),
-    });
-
-    return () => trigger.kill();
-  }, []);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(".stat-item", {
-        y: 20,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-10 sm:py-16 px-4 sm:px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-          {stats.map((s) => (
-            <div key={s.label} className="stat-item text-center">
-              <div className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-1.5">
-                <Counter
-                  target={s.value}
-                  suffix={s.suffix}
-                  decimals={s.decimals}
-                  active={active}
-                />
-              </div>
-              <div className="text-sm text-muted font-sans">{s.label}</div>
-            </div>
-          ))}
+    <div ref={ref} className="metrics">
+      {stats.map((s) => (
+        <div key={s.label} className="metric">
+          <div className="metric__value">
+            <Counter target={s.value} decimals={s.decimals} active={active} />
+            {s.suffix && <span className="suf">{s.suffix}</span>}
+          </div>
+          <div className="metric__label">{s.label}</div>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

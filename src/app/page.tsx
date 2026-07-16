@@ -1,24 +1,15 @@
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Stats from "@/components/Stats";
-import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import About from "@/components/About";
+import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-
-function Divider() {
-  return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6">
-      <div className="section-divider" />
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -27,20 +18,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Divider />
-        <About />
-        <Stats />
-        <Divider />
-        <Experience />
-        <Divider />
+        <hr className="rule-thick" />
         <Projects />
-        <Divider />
+        <About />
+        <Experience />
         <Skills />
-        <Divider />
         <Education />
-        <Divider />
         <Resume />
-        <Divider />
         <Contact />
       </main>
       <Footer />

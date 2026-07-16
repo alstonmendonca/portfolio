@@ -4,17 +4,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
+  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Resume", href: "#resume" },
-  { label: "Contact", href: "#contact" },
+  { label: "Toolkit", href: "#skills" },
+  { label: "Résumé", href: "#resume" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const navRef = useRef<HTMLElement>(null);
@@ -24,14 +21,11 @@ export default function Navbar() {
     if (ticking.current) return;
     ticking.current = true;
     requestAnimationFrame(() => {
-      setScrolled(window.scrollY > 50);
       const sections = navLinks.map((l) => l.href.slice(1));
       let current = "";
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 120) {
-          current = `#${id}`;
-        }
+        if (el && el.getBoundingClientRect().top <= 140) current = `#${id}`;
       }
       setActiveSection(current);
       ticking.current = false;
@@ -46,107 +40,188 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!mobileOpen) return;
-    const close = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node))
-        setMobileOpen(false);
-    };
-    const esc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false);
-    };
-    document.addEventListener("mousedown", close);
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setMobileOpen(false);
     document.addEventListener("keydown", esc);
-    return () => {
-      document.removeEventListener("mousedown", close);
-      document.removeEventListener("keydown", esc);
-    };
+    return () => document.removeEventListener("keydown", esc);
   }, [mobileOpen]);
 
-  const handleNavClick = (href: string) => {
+  const go = (href: string) => {
     setMobileOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-3 sm:top-4 left-3 right-3 sm:left-4 sm:right-4 z-50 transition-all duration-500 rounded-2xl ${
-        mobileOpen
-          ? "bg-card border border-foreground/[0.08] shadow-lg shadow-black/30"
-          : scrolled
-            ? "bg-card/90 backdrop-blur-xl mobile-no-blur border border-foreground/[0.08] shadow-lg shadow-black/30"
-            : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+    <header ref={navRef} className="nav-slab-wrap">
+      <div className="nav-slab">
         <a
-          href="#hero"
+          href="#top"
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="font-heading text-xl font-bold tracking-tight cursor-pointer text-foreground"
+          className="slab-mark"
         >
-          alston<span className="text-muted">.</span>
+          ALSTON<span className="accent-mark">/</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(link.href);
-              }}
-              className={`text-sm transition-colors duration-300 cursor-pointer relative group ${
-                activeSection === link.href
-                  ? "text-foreground"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              {link.label}
-              <span
-                className={`absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300 ${
-                  activeSection === link.href
-                    ? "w-full"
-                    : "w-0 group-hover:w-full"
-                }`}
-              />
-            </a>
-          ))}
-        </div>
+        <nav className="slab-nav" aria-label="Primary">
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    go(link.href);
+                  }}
+                  className={activeSection === link.href ? "is-active" : ""}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            go("#contact");
+          }}
+          className="slab-cta"
+        >
+          Get in touch
+        </a>
 
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-foreground cursor-pointer p-2.5 -mr-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center"
+          onClick={() => setMobileOpen((v) => !v)}
+          className="slab-burger"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="px-6 pb-6 max-h-[calc(100svh-5rem)] overflow-y-auto flex flex-col gap-2">
-          {navLinks.map((link) => (
+      {mobileOpen && (
+        <div className="slab-sheet">
+          {[...navLinks, { label: "Contact", href: "#contact" }].map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick(link.href);
+                go(link.href);
               }}
-              className="text-foreground transition-colors duration-300 cursor-pointer text-lg hover:text-accent-hover py-3"
+              className="slab-sheet__link"
             >
               {link.label}
             </a>
           ))}
         </div>
-      </div>
-    </nav>
+      )}
+
+      <style jsx>{`
+        .nav-slab-wrap {
+          position: sticky;
+          top: 0;
+          z-index: 200;
+        }
+        .nav-slab {
+          display: flex;
+          align-items: stretch;
+          background: var(--color-paper);
+          border-bottom: 3px solid var(--color-ink);
+        }
+        .slab-mark {
+          display: inline-flex;
+          align-items: center;
+          font-family: var(--font-display);
+          font-weight: 800;
+          font-size: var(--text-md);
+          letter-spacing: 0.02em;
+          color: var(--color-ink);
+          padding: 0.9rem var(--page-gutter);
+          border-right: 3px solid var(--color-ink);
+          white-space: nowrap;
+        }
+        .slab-nav { display: none; margin-left: auto; }
+        .slab-nav ul {
+          display: flex;
+          align-items: stretch;
+          gap: 0;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          height: 100%;
+        }
+        .slab-nav li { display: flex; border-left: 2px solid var(--color-ink); }
+        .slab-nav a {
+          display: inline-flex;
+          align-items: center;
+          font-family: var(--font-mono);
+          font-weight: 600;
+          font-size: var(--text-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--color-ink);
+          padding: 0 1.1rem;
+          transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+        }
+        .slab-nav a:hover { background: var(--color-ink); color: var(--color-paper); }
+        .slab-nav a.is-active { background: var(--color-accent); color: var(--color-on-accent); }
+        .slab-cta {
+          display: none;
+          align-items: center;
+          font-family: var(--font-display);
+          font-weight: 700;
+          font-size: var(--text-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          white-space: nowrap;
+          color: var(--color-on-accent);
+          background: var(--color-accent);
+          padding: 0 1.3rem;
+          border-left: 3px solid var(--color-ink);
+          transition: background-color var(--dur-short) var(--ease-out);
+        }
+        .slab-cta:hover { background: var(--color-accent-deep); }
+        .slab-burger {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 56px;
+          margin-left: auto;
+          color: var(--color-ink);
+          border-left: 3px solid var(--color-ink);
+          cursor: pointer;
+        }
+        .slab-sheet {
+          display: flex;
+          flex-direction: column;
+          background: var(--color-paper);
+          border-bottom: 3px solid var(--color-ink);
+        }
+        .slab-sheet__link {
+          padding: 1rem var(--page-gutter);
+          font-family: var(--font-mono);
+          font-weight: 600;
+          font-size: var(--text-base);
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--color-ink);
+          border-top: 2px solid var(--color-ink);
+        }
+        .slab-sheet__link:first-child { border-top: 0; }
+        .slab-sheet__link:hover { background: var(--color-ink); color: var(--color-paper); }
+
+        @media (min-width: 52rem) {
+          .slab-nav { display: flex; }
+          .slab-cta { display: inline-flex; }
+          .slab-burger { display: none; }
+        }
+      `}</style>
+    </header>
   );
 }

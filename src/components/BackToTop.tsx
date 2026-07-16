@@ -11,7 +11,7 @@ export default function BackToTop() {
     if (ticking.current) return;
     ticking.current = true;
     requestAnimationFrame(() => {
-      setVisible(window.scrollY > 600);
+      setVisible(window.scrollY > 700);
       ticking.current = false;
     });
   }, []);
@@ -25,11 +25,48 @@ export default function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed mobile-safe-bottom right-4 sm:right-6 z-40 w-11 h-11 rounded-xl bg-card/90 mobile-no-blur backdrop-blur-sm border border-foreground/[0.08] flex items-center justify-center text-muted hover:text-foreground hover:border-foreground/30 transition-all duration-300 cursor-pointer ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
-      }`}
+      className="back-to-top mobile-safe-bottom"
+      data-visible={visible}
     >
-      <ArrowUp size={18} />
+      <ArrowUp size={20} />
+      <style jsx>{`
+        .back-to-top {
+          position: fixed;
+          right: clamp(1rem, 4vw, 1.5rem);
+          z-index: 200;
+          width: 48px;
+          height: 48px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-on-accent);
+          background: var(--color-accent);
+          border: 3px solid var(--color-ink);
+          box-shadow: var(--shadow-hard-sm);
+          cursor: pointer;
+          opacity: 0;
+          transform: translateY(12px);
+          pointer-events: none;
+          transition: opacity var(--dur-short) var(--ease-out),
+                      transform var(--dur-micro) var(--ease-out),
+                      box-shadow var(--dur-micro) var(--ease-out),
+                      background-color var(--dur-short) var(--ease-out);
+        }
+        .back-to-top[data-visible="true"] {
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+        }
+        .back-to-top[data-visible="true"]:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: var(--shadow-hard);
+          background: var(--color-accent-deep);
+        }
+        .back-to-top[data-visible="true"]:active {
+          transform: translate(0, 0);
+          box-shadow: 2px 2px 0 var(--color-ink);
+        }
+      `}</style>
     </button>
   );
 }

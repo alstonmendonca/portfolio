@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function SmoothScroll() {
   const lenisRef = useRef<InstanceType<typeof import("lenis").default> | null>(
@@ -9,40 +8,35 @@ export default function SmoothScroll() {
   );
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let cancelled = false;
+    let rafId = 0;
 
     (async () => {
       const Lenis = (await import("lenis")).default;
       if (cancelled) return;
 
       const isMobile = window.innerWidth < 640;
-
       const instance = new Lenis({
         duration: isMobile ? 0.8 : 1.2,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         touchMultiplier: isMobile ? 1.5 : 2,
       });
-
       lenisRef.current = instance;
 
-      // Connect Lenis to GSAP ScrollTrigger so scroll-triggered animations fire
-      instance.on("scroll", ScrollTrigger.update);
-
-      // Use GSAP ticker to drive Lenis instead of manual rAF loop
-      gsap.ticker.add((time) => {
-        instance.raf(time * 1000);
-      });
-
-      gsap.ticker.lagSmoothing(0);
+      const raf = (time: number) => {
+        instance.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+      rafId = requestAnimationFrame(raf);
     })();
 
     return () => {
       cancelled = true;
-      if (lenisRef.current) {
-        gsap.ticker.remove(lenisRef.current.raf as Parameters<typeof gsap.ticker.remove>[0]);
-        lenisRef.current.destroy();
-        lenisRef.current = null;
-      }
+      cancelAnimationFrame(rafId);
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
