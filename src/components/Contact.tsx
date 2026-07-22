@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 const contactLinks = [
   { label: "Email", value: "alstondmendonca@gmail.com", href: "mailto:alstondmendonca@gmail.com", icon: Mail },
-  { label: "Phone", value: "+971 56 324 3787", href: "tel:+971563243787", icon: Phone },
+  { label: "Phone", value: "+91 91088 16244", href: "tel:+919108816244", icon: Phone },
   { label: "GitHub", value: "github.com/alstonmendonca", href: "https://github.com/alstonmendonca", icon: Github },
   { label: "LinkedIn", value: "linkedin.com/in/alstonmendonca", href: "https://linkedin.com/in/alstonmendonca", icon: Linkedin },
 ];
@@ -14,7 +14,7 @@ export default function Contact() {
       <div className="sec-head">
         <div className="sec-head__rule">
           <span className="sec-head__index">007 / contact</span>
-          <span className="sec-head__meta">Dubai · open to relocation</span>
+          <span className="sec-head__meta">Bengaluru · open to relocation anywhere in India</span>
         </div>
         <h2 className="sec-title">Let&apos;s talk</h2>
       </div>

@@ -7,7 +7,7 @@ export default function About() {
       <div className="sec-head">
         <div className="sec-head__rule">
           <span className="sec-head__index">002 / about</span>
-          <span className="sec-head__meta">Dubai, UAE</span>
+          <span className="sec-head__meta">Bengaluru, India</span>
         </div>
         <h2 className="sec-title">
           I build things that work in the <span className="accent-mark">real world</span>.
@@ -22,7 +22,7 @@ export default function About() {
 
         <Reveal className="about-body" index={1}>
           <p>
-            I&apos;m a Dubai-based Software Developer &amp; AI/ML Engineer with
+            I&apos;m a Bengaluru-based Software Developer &amp; AI/ML Engineer with
             1.5+ years of professional experience building and deploying
             machine-learning systems. I specialize in NLP, Computer Vision, and
             LLM integration, from React/Next.js frontends to Node.js and FastAPI

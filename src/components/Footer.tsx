@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="foot wrap">
       <p className="foot__mark">ALSTON<span className="accent-mark">.</span></p>
       <p className="foot__tagline">
-        Software Developer &amp; AI/ML Engineer. Dubai, UAE. <b>Open to relocation.</b>
+        Software Developer &amp; AI/ML Engineer. Bengaluru, India. <b>Open to relocation anywhere in India.</b>
       </p>
       <div className="foot__meta">
         <span className="foot__copy">© {new Date().getFullYear()} Alston Daniel Mendonca</span>

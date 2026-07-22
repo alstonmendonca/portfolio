@@ -24,9 +24,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Alston Daniel Mendonca | Software Developer & AI/ML Engineer · Dubai",
+  title: "Alston Daniel Mendonca | Software Developer & AI/ML Engineer · Bengaluru",
   description:
-    "Portfolio of Alston Daniel Mendonca, a Dubai-based Software Developer & AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer Vision, LLM integration, and production-ready applications.",
+    "Portfolio of Alston Daniel Mendonca, a Bengaluru-based Software Developer & AI/ML Engineer with 1.5+ years of professional experience. Specialized in NLP, Computer Vision, LLM integration, and production-ready applications.",
   keywords: [
     "Alston Mendonca",
     "Alston Daniel Mendonca",
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     "Machine Learning",
     "AI Engineer",
     "Full-Stack Developer",
-    "Dubai",
-    "UAE",
+    "Bengaluru",
+    "India",
     "React",
     "Next.js",
     "Python",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     "AWS SageMaker",
   ],
   openGraph: {
-    title: "Alston Daniel Mendonca | Software Developer & AI/ML Engineer · Dubai",
+    title: "Alston Daniel Mendonca | Software Developer & AI/ML Engineer · Bengaluru",
     description:
-      "Dubai-based Software Developer & AI/ML Engineer. Co-Founder of ViperCore. Building production-ready applications.",
+      "Bengaluru-based Software Developer & AI/ML Engineer. Co-Founder of ViperCore. Building production-ready applications.",
     type: "website",
     url: "https://alston.vercel.app",
   },
